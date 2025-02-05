@@ -1,4 +1,4 @@
-// graphqlFilter.ts
+// filter.ts
 
 // Define a type for an object that can hold any key-value pair
 interface AnyObj {
@@ -6,7 +6,7 @@ interface AnyObj {
 }
 
 // GraphQL Filter Interface
-export interface GraphQlFilter {
+export interface Filter {
     key: string; // The key (field) to filter by
     type: "single" | "list"; // The type of filter - single or list
     value: (boolean | string | number)[]; // The values for filtering
@@ -14,12 +14,12 @@ export interface GraphQlFilter {
 }
 
 // Function to generate a structured GraphQL filter query
-export const fetchGraphqlFilter = (input: GraphQlFilter[]): AnyObj => {
+export const generateQuery = (input: Filter[]): AnyObj => {
     // Object to hold single value filters
     const singles: AnyObj = {};
     
     // Array to hold list filters
-    const lists: AnyObj[] = [];
+    const lists: any[] = [];
 
     // Loop through each filter in the input
     input.forEach((filter) => {
@@ -52,15 +52,15 @@ export const fetchGraphqlFilter = (input: GraphQlFilter[]): AnyObj => {
 };
 
 // Example usage with an array of filters
-const filters: GraphQlFilter[] = [
+const filters: Filter[] = [
     { key: "name", type: "single", value: ["qwerty"] }, // Single filter for "name"
     { key: "deleted", type: "single", operator: "ne", value: [true] }, // Single filter for "deleted"
     { key: "city", type: "list", operator: "eq", value: ["berlin", "chennai"] }, // List filter for "city"
 ];
 
 // Call the function with the filters and log the resulting GraphQL query
-const graphqlQuery = fetchGraphqlFilter(filters);
-console.log(graphqlQuery);
+const query = generateQuery(filters);
+console.log(query);
 
 // Example Output:
 // {
