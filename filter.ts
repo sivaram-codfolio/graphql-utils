@@ -10,7 +10,7 @@ export interface Filter {
     key: string; // The key (field) to filter by
     type: "single" | "list"; // The type of filter - single or list
     value: (boolean | string | number)[]; // The values for filtering
-    operator?: "ne" | "eq" | "between" | "contains" | "lte"; // Optional filter operator (default to "eq")
+    operator?: "ne" | "eq" | "between" | "contains" | "lte" | "gte"; // Optional filter operator (default to "eq")
 }
 
 // Function to generate a structured GraphQL filter query
